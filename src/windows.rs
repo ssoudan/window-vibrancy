@@ -63,16 +63,17 @@ pub fn clear_blur(hwnd: HWND) -> Result<(), Error> {
 }
 
 pub fn apply_acrylic(hwnd: HWND, color: Option<Color>) -> Result<(), Error> {
-    if is_backdroptype_supported() {
-        unsafe {
-            DwmSetWindowAttribute(
-                hwnd,
-                DWMWA_SYSTEMBACKDROP_TYPE as _,
-                &DWM_SYSTEMBACKDROP_TYPE::DWMSBT_TRANSIENTWINDOW as *const _ as _,
-                4,
-            );
-        }
-    } else if is_swca_supported() {
+    // if is_backdroptype_supported() {
+    //     unsafe {
+    //         DwmSetWindowAttribute(
+    //             hwnd,
+    //             DWMWA_SYSTEMBACKDROP_TYPE as _,
+    //             &DWM_SYSTEMBACKDROP_TYPE::DWMSBT_TRANSIENTWINDOW as *const _ as _,
+    //             4,
+    //         );
+    //     }
+    // } else
+    if is_swca_supported() {
         unsafe {
             SetWindowCompositionAttribute(
                 hwnd,
@@ -89,16 +90,17 @@ pub fn apply_acrylic(hwnd: HWND, color: Option<Color>) -> Result<(), Error> {
 }
 
 pub fn clear_acrylic(hwnd: HWND) -> Result<(), Error> {
-    if is_backdroptype_supported() {
-        unsafe {
-            DwmSetWindowAttribute(
-                hwnd,
-                DWMWA_SYSTEMBACKDROP_TYPE as _,
-                &DWM_SYSTEMBACKDROP_TYPE::DWMSBT_DISABLE as *const _ as _,
-                4,
-            );
-        }
-    } else if is_swca_supported() {
+    // if is_backdroptype_supported() {
+    //     unsafe {
+    //         DwmSetWindowAttribute(
+    //             hwnd,
+    //             DWMWA_SYSTEMBACKDROP_TYPE as _,
+    //             &DWM_SYSTEMBACKDROP_TYPE::DWMSBT_DISABLE as *const _ as _,
+    //             4,
+    //         );
+    //     }
+    // } else 
+    if is_swca_supported() {
         unsafe {
             SetWindowCompositionAttribute(hwnd, ACCENT_STATE::ACCENT_DISABLED, None);
         }
